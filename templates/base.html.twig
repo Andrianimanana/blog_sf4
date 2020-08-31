@@ -1,12 +1,31 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+	<meta charset="UTF-8">
+	<title>{% block title %}Blog{% endblock %}</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+	{% block stylesheets %}
+	<!-- <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}"> -->
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/materialize.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+	{% endblock %}
+</head>
+<body>
+	<nav>
+		<div class="nav-wrapper">
+			<div class="container">
+				<a href="#" class="brand-logo">Symfony Blog</a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><a href="#">Home</a></li>
+					<li><a href="#">Login</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	{% block content %}{% endblock %}
+	{% block javascripts %}
+	<script src="{{ asset('js/materialize.min.js') }}"></script> 
+	<!-- <script src="{{ asset('js/jquery.min.js') }}"></script> -->
+	{% endblock %}
+</body>
 </html>
