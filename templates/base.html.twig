@@ -14,7 +14,7 @@
 	<nav>
 		<div class="nav-wrapper">
 			<div class="container">
-				<a href="#" class="brand-logo">Symfony Blog</a>
+				<a href="{{ path('homepage')}}" class="brand-logo">Symfony Blog</a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<li><a href="#">Home</a></li>
 					<li><a href="#">Login</a></li>
@@ -24,8 +24,11 @@
 	</nav>
 	{% block content %}{% endblock %}
 	{% block javascripts %}
+	<script src="{{ asset('js/jquery.min.js') }}"></script>
 	<script src="{{ asset('js/materialize.min.js') }}"></script> 
-	<!-- <script src="{{ asset('js/jquery.min.js') }}"></script> -->
+	<script type="text/javascript">
+		$('select').formSelect();
+	</script>
 	{% endblock %}
 </body>
 </html>

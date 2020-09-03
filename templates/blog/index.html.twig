@@ -5,9 +5,15 @@
 {% block content %} 
 <div class="container">
 	<div class="row">
-		<div class="col s12 m12 l12">
-			<h1>Hello, c'est la page d'accueil</h1>
+	{% for article in articles %}
+		<div class="col s12 m4 l3">
+			<div class="article-card">
+				<img src="{{ asset('upload/' ~ article.picture) }}" class="responsive-img">
+				<h2><a href="{{ path('show_article', {'id': article.id}) }}">{{ article.title }}</a></h2>
+				<span class="date">{{ article.publicationDate|date('d/m/Y') }}</span>
+			</div>			
 		</div>
+	{% endfor %}
 	</div>
 </div>
 {% endblock %}

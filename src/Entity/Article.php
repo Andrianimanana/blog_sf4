@@ -6,6 +6,7 @@ use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
@@ -25,6 +26,8 @@ class Article
     private $picture;
 
     /**
+     * @Assert\NotBlank(message="Ce champ ne doit pas être vide")
+     * @Assert\Length(min=3, minMessage="Au moins {{ min }} caractères")
      * @ORM\Column(type="string", length=255)
      */
     private $title;
@@ -69,7 +72,7 @@ class Article
         return $this->picture;
     }
 
-    public function setPicture(string $picture): self
+    public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
 
