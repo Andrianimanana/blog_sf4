@@ -17,17 +17,23 @@
 				<a href="{{ path('homepage')}}" class="brand-logo">Symfony Blog</a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<li><a href="#">Home</a></li>
-					<li><a href="#">Login</a></li>
+					<li>
+						{% if not app.user %}
+							<a href="{{ path('app_login') }}">Se Connecter</a>
+						{% else %}
+							<a href="{{ path('app_logout') }}">Se Déconnecter</a>
+						{% endif %}
+					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
-	{% block content %}{% endblock %}
+	{% block body %}{% endblock %}
 	{% block javascripts %}
 	<script src="{{ asset('js/jquery.min.js') }}"></script>
 	<script src="{{ asset('js/materialize.min.js') }}"></script> 
 	<script type="text/javascript">
-		$('select').formSelect();
+	$('select').formSelect();
 	</script>
 	{% endblock %}
 </body>
