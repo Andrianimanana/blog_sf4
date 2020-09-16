@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\ArticleType;
 use App\Entity\Article;
 use App\Entity\User;
+use App\Constant\MessageConstant;
 
 class BlogController extends AbstractController
 {
@@ -27,8 +28,9 @@ class BlogController extends AbstractController
 
     public function add(Request $request)
     {
-        $article  = new Article();
-        $form     = $this->createForm(ArticleType::class, $article);
+        $pass       = false;
+        $article    = new Article();
+        $form       = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
@@ -54,10 +56,18 @@ class BlogController extends AbstractController
                 $article->setPicture($new_file_name);                    
             }    
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($article);
-            $em->flush();
+            $em     = $this->getDoctrine()->getManager();
+            try {
+                $em->persist($article);
+                $em->flush();
+                $pass = true;
+            } catch (Exception $e) {
+                $this->addFlash(MessageConstant::ERROR_TYPE, $e);                
+            }
         }
+
+        if($pass)
+            $this->addFlash(MessageConstant::SUCCESS_TYPE, MessageConstant::AJOUT_MESSAGE);
 
         return $this->render('blog/add.html.twig', [
             'form'      => $form->createView(),
@@ -113,9 +123,22 @@ class BlogController extends AbstractController
 		]);		
     }
 
-    public function remove($id)
+    public function remove(Article $article)
     {
-		return $this->render('blog/index.html.twig');		
+		
+        $em     = $this->getDoctrine()->getManager();
+        $pass   = false;
+        try {
+            $em->remove($article);
+            $em->flush();
+            $pass = true;        
+        } catch (Exception $error) {
+            # @toDo
+            $this->addFlash(MessageConstant::ERROR_TYPE, $error);
+        } 
+        if($pass)
+            $this->addFlash(MessageConstant::SUCCESS_TYPE, MessageConstant::SUPPRESSION_MESSAGE);
+        return $this->redirectToRoute('admin');
     }
 
     public function admin(){
