@@ -53,3 +53,13 @@ nav {
 .input-field span.error {
 	color: #e04447;
 }
+
+.badge.blue, .badge.red{
+	border-radius: 20px;
+    color: white;
+    /*font-weight: 500;*/
+}
+
+.container{
+	padding-top: 10px;
+}

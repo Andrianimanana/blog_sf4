@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\ArticleType;
 use App\Entity\Article;
+use App\Entity\User;
 
 class BlogController extends AbstractController
 {
@@ -115,5 +116,16 @@ class BlogController extends AbstractController
     public function remove($id)
     {
 		return $this->render('blog/index.html.twig');		
+    }
+
+    public function admin(){
+        # list of article
+        $articles   = $this->getDoctrine()->getRepository(Article::class)->findAll();
+        # list of user
+        $users      = $this->getDoctrine()->getRepository(User::class)->findAll();
+        return $this->render('admin/index.html.twig', [
+            "articles"  => $articles,
+            "users"     => $users
+        ]);
     }
 }

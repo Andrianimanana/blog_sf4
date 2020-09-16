@@ -17,8 +17,11 @@ edit_article:
         id: '\d+'
 
 remove_article:
-     path: /remove/{id}
-     controller: App\Controller\BlogController::remove 
-     requirements: 
+    path: /remove/{id}
+    controller: App\Controller\BlogController::remove 
+    requirements: 
         id: '\d+'
+admin:
+    path: /admin
+    controller: App\Controller\BlogController::admin
          

@@ -1,0 +1,11 @@
+{# templates/blog/includes/liste_article.html.twig #}
+
+{% for article in articles %}
+	<div class="col s12 m4 l3">
+		<div class="article-card">
+			<img src="{{ asset('upload/' ~ article.picture) }}" class="responsive-img">
+			<h2><a href="{{ path('show_article', {'id': article.id}) }}">{{ article.title }}</a></h2>
+			<span class="date">{{ article.publicationDate|date('d/m/Y') }}</span>
+		</div>			
+	</div>
+{% endfor %}
