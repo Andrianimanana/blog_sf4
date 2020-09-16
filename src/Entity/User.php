@@ -80,6 +80,13 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
+    public function addRoles(string $role): self
+    {
+        if(!in_array($role, $this->roles)){
+            array_push($this->roles, $role);
+        }
+        return $this;
+    }
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;

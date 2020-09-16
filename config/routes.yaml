@@ -3,7 +3,7 @@ homepage:
     controller: App\Controller\BlogController::index
 
 add_article:
-    path: /add
+    path: /admin/add
     controller: App\Controller\BlogController::add
 
 show_article:
@@ -11,13 +11,13 @@ show_article:
     controller: App\Controller\BlogController::show
 
 edit_article:
-    path: /edit/{id}
+    path: /admin/edit/{id}
     controller: App\Controller\BlogController::edit
     requirements: 
         id: '\d+'
 
 remove_article:
-    path: /remove/{id}
+    path: /admin/remove/{id}
     controller: App\Controller\BlogController::remove 
     requirements: 
         id: '\d+'

@@ -10,7 +10,9 @@
 
 		<div class="row">
 			<div class="col s12">
-				<a href="{{ path('add_article') }}" class="btn btn blue darken-4" style="float: right">Ajouter</a>
+				{% if is_granted('ROLE_ADMIN') %}
+					<a href="{{ path('add_article') }}" class="btn btn blue darken-4" style="float: right">Ajouter</a>
+				{% endif %}
 				<h5>Articles</h5>
 				<table>
 					<tr>
@@ -34,8 +36,13 @@
 						<td>{{ article.publicationDate ? article.publicationDate|date('d/m/Y') : '-' }}</td>
 						<td>{{ article.lastUpdateDate|date('d/m/Y') }}</td>
 						<td>
-							<a href="{{ path('edit_article', {'id': article.id}) }}"><i class="material-icons blue-text">edit</i></a>
-							<a href="{{ path('remove_article', {'id': article.id}) }}"><i class="material-icons red-text">delete</i></a>
+							{% if is_granted('ROLE_ADMIN') %}
+								<a href="{{ path('edit_article', {'id': article.id}) }}"><i class="material-icons blue-text">edit</i></a>
+								<a href="{{ path('remove_article', {'id': article.id}) }}"><i class="material-icons red-text">delete</i></a>
+							{% else %}
+								<a href="#"><i class="material-icons blue-text">-</i></a>
+								<a href="#"><i class="material-icons red-text">-</i></a>	
+							{% endif %}
 						</td>
 					</tr>
 					{% set i = i+1 %}
