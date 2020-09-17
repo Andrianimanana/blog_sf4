@@ -66,8 +66,11 @@ class BlogController extends AbstractController
             }
         }
 
-        if($pass)
+        if($pass){
             $this->addFlash(MessageConstant::SUCCESS_TYPE, MessageConstant::AJOUT_MESSAGE);
+            
+            return $this->redirectToRoute('admin');
+        }
 
         return $this->render('blog/add.html.twig', [
             'form'      => $form->createView(),
@@ -115,6 +118,8 @@ class BlogController extends AbstractController
 
             $em = $this->getDoctrine()->getManager(); 
             $em->flush();
+
+            return $this->redirectToRoute('admin');
         }
         
         return $this->render('blog/edit.html.twig', [

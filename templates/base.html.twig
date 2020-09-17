@@ -14,13 +14,16 @@
 	<nav>
 		<div class="nav-wrapper">
 			<div class="container">
-				<a href="{{ path('homepage')}}" class="brand-logo">Symfony Blog</a>
+				<a href="{{ path('homepage')}}" class="brand-logo">Blog ~ sf4</a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><a href="#">Home</a></li>
+					{% if app.user %}
+					<li>Bienvenue <span style="font-style: italic;">{{app.user.nameuser}}</span></li>
+					{% endif %}
 					<li>
 						{% if not app.user %}
 							<a href="{{ path('app_login') }}">Se Connecter</a>
 						{% else %}
+
 							<a href="{{ path('app_logout') }}">Se Déconnecter</a>
 						{% endif %}
 					</li>

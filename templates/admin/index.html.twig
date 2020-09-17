@@ -33,7 +33,7 @@
 								{{ article.isPublised ? 'oui' : 'non' }}
 							</span>
 						</td>
-						<td>{{ article.publicationDate ? article.publicationDate|date('d/m/Y') : '-' }}</td>
+						<td>{{ article.isPublised ? article.publicationDate|date('d/m/Y') : '-' }}</td>
 						<td>{{ article.lastUpdateDate|date('d/m/Y') }}</td>
 						<td>
 							{% if is_granted('ROLE_ADMIN') %}
