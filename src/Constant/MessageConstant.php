@@ -8,5 +8,6 @@ class MessageConstant{
     public const AJOUT_MESSAGE = 'Action terminé avec success';
     public const SUCCESS_TYPE = 'success';
     public const ERROR_TYPE = 'error';
+    public const ERROR_AUTH_USER_MESSAGE = 'Vous dévriez vous identifié';
 }
 

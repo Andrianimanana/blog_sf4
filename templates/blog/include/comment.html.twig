@@ -1,0 +1,31 @@
+{% set nb = comments|length %}
+{% if nb %}
+<ul class="collection col s12 m12 l9 offset-l2">
+	<h5>
+		{% if nb > 1 %}
+		Commentaires <i>({{nb}}) </i> 
+		{% else %}
+		Commentaire <i>({{nb}}) </i>
+		{% endif %}
+	</h5>
+	{% for comment in comments %}
+	<li class="collection-item avatar">
+		<img src="images/yuna.jpg" alt="" class="circle">
+		<span class="title">{{comment.user.nameuser}}</span>
+		<p>{{comment.comment}}</p>
+		<a href="#!" class="secondary-content">
+			<i class="material-icons">like</i>
+		</a>
+	</li>
+	{% endfor %}		
+</ul>
+{% endif %}
+{{ form_start(form_com, {'action': path('comment', {'id':  article.id }),'attr' : {'id':'comment'}}) }}
+<div class="col s12 m12 l8 offset-l3">
+	<h5>Votre commentaire</h5>		
+	{{ form_widget(form_com.comment, {'attr':{'class':'materialize-textarea', 'placeholder':'Votre commentaire'}}) }}
+	<div class="row">
+		<button class="btn btn-small">Enregistrer</button>
+	</div>
+</div>
+{{ form_end(form_com) }}

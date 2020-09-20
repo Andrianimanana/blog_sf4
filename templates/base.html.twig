@@ -31,6 +31,9 @@
 			</div>
 		</div>
 	</nav>
+	<!-- message  success || error || infos-->
+	{% include 'blog/include/message.html.twig' %}
+	
 	{% block body %}{% endblock %}
 	{% block javascripts %}
 	<script src="{{ asset('js/jquery.min.js') }}"></script>

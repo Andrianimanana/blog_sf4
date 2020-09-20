@@ -1,27 +1,36 @@
+# route for all users
+# 
 homepage:
     path: /
     controller: App\Controller\BlogController::index
-
-add_article:
-    path: /admin/add
-    controller: App\Controller\BlogController::add
 
 show_article:
     path: /show/{id}
     controller: App\Controller\BlogController::show
 
-edit_article:
-    path: /admin/edit/{id}
-    controller: App\Controller\BlogController::edit
-    requirements: 
-        id: '\d+'
+comment:
+    path: /comment/article/{id}
+    controller: App\Controller\BlogController::comment
 
-remove_article:
-    path: /admin/remove/{id}
-    controller: App\Controller\BlogController::remove 
-    requirements: 
-        id: '\d+'
-admin:
-    path: /admin
-    controller: App\Controller\BlogController::admin
+# route for admin only
+# 
+# admin:
+#     path: /admin
+#     controller: App\Controller\BlogController::admin
+
+# add_article:
+#     path: /admin/add
+#     controller: App\Controller\BlogController::add
+
+# edit_article:
+#     path: /admin/edit/{id}
+#     controller: App\Controller\BlogController::edit
+#     requirements: 
+#         id: '\d+'
+
+# remove_article:
+#     path: /admin/remove/{id}
+#     controller: App\Controller\BlogController::remove 
+#     requirements: 
+#         id: '\d+'
          
