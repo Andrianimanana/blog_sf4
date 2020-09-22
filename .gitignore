@@ -20,4 +20,4 @@
 ###< symfony/web-server-bundle ###
 
 ###> public/upload
-/public/upload 
+#/public/upload 
