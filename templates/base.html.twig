@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>{% block title %}Blog{% endblock %}</title>
+	<title>{% block title %}Blog{% endblock %}</title> 
 	<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 	{% block stylesheets %} 
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/icon.css') }}">
@@ -11,36 +11,48 @@
 	{% endblock %}
 </head>
 <body>
-	<nav>
-		<div class="nav-wrapper">
-			<div class="container">
-				<a href="{{ path('homepage')}}" class="brand-logo">Blog ~ sf4</a>
-				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					{% if app.user %}
-					<li>Bienvenue <span style="font-style: italic;">{{app.user.nameuser}}</span></li>
-					{% endif %}
-					<li>
-						{% if not app.user %}
-							<a href="{{ path('app_login') }}">Se Connecter</a>
-						{% else %}
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+	<li><a href="#!">sub menu</a></li> 
+	<li class="divider"></li>
+	<li>			
+		{% if not app.user %}
+			<a href="{{ path('app_login') }}"><i class="material-icons">login</i>Se connecter</a>
+		{% else %}
+			<a href="{{ path('app_logout') }}"><i class="material-icons">logout</i>Se Déconnecter</a>
+		{% endif %}  
+	</li>
+</ul>
+<nav>
+	<div class="nav-wrapper">
+		<a href="#" class="brand-logo"><i class="material-icons">menu</i>Blog ~ sf4</a>
+		<ul class="right hide-on-med-and-down">
+			<li>
+				{% if app.user %}
+					<a class="col s8 btn-flat dropdown-button waves-effect waves-light white-text" href="#" data-activates="profile-dropdown">{{app.user.nameuser}}<i class="mdi-navigation-arrow-drop-down right"></i></a>
+				{% endif %}
+			</li>
+			<li><a href="badges.html">Components</a></li>
+			<!-- Dropdown Trigger -->
+			<li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+		</ul>
+	</div>
+</nav>  
+<!-- message  success || error || infos-->
+{% include 'blog/include/message.html.twig' %}
 
-							<a href="{{ path('app_logout') }}">Se Déconnecter</a>
-						{% endif %}
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<!-- message  success || error || infos-->
-	{% include 'blog/include/message.html.twig' %}
-	
-	{% block body %}{% endblock %}
+{% block body %}{% endblock %}
 	{% block javascripts %}
-	<script src="{{ asset('js/jquery.min.js') }}"></script>
-	<script src="{{ asset('js/materialize.min.js') }}"></script> 
-	<script type="text/javascript">
-		$('select').formSelect();
-	</script>
+		<script src="{{ asset('js/jquery.min.js') }}"></script>
+		<script src="{{ asset('js/materialize.min.js') }}"></script> 
+
+		<script type="text/javascript">
+		$('select').formSelect();	 
+		 
+		jQuery(document).ready(function(){
+			$(".dropdown-trigger").dropdown();
+	  });
+		</script>
 	{% endblock %}
 </body>
 </html>

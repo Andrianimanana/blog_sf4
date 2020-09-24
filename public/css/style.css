@@ -80,3 +80,7 @@ nav {
 #comment .btn{
 	float: right;
 }
+
+nav .nav-wrapper { 
+    padding: 0 40px;
+}
