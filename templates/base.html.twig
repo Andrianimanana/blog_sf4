@@ -4,8 +4,8 @@
 	<meta charset="UTF-8">
 	<title>{% block title %}Blog{% endblock %}</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-	{% block stylesheets %}
-	<!-- <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}"> -->
+	{% block stylesheets %} 
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/icon.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/materialize.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
 	{% endblock %}
@@ -39,7 +39,7 @@
 	<script src="{{ asset('js/jquery.min.js') }}"></script>
 	<script src="{{ asset('js/materialize.min.js') }}"></script> 
 	<script type="text/javascript">
-	$('select').formSelect();
+		$('select').formSelect();
 	</script>
 	{% endblock %}
 </body>
