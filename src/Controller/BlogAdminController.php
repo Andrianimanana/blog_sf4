@@ -10,12 +10,18 @@ use App\Constant\MessageConstant;
 use App\Form\ArticleType;
 use App\Entity\Article;
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @Route("/admin")
  */
 class BlogAdminController extends AbstractController
 {
+	private $em;
+	public function __construct(EntityManagerInterface $em){
+		$this->em = $em;
+	}
+
 	/**
 	 * @Route("/",name="admin") 
 	 */
@@ -37,6 +43,7 @@ class BlogAdminController extends AbstractController
 	{
 		$pass       = false;
 		$article    = new Article();
+		
 		$form       = $this->createForm(ArticleType::class, $article);
 		$form->handleRequest($request);
 
@@ -47,26 +54,17 @@ class BlogAdminController extends AbstractController
             # publié
 			if($article->getIsPublised())
 				$article->setPublicationDate($date);
-
-			$picture = $form->get('picture')->getData();
+            
             # upload file
-			if($picture){
-				$orgin_file_name = pathinfo($picture->getClientOriginalName(), PATHINFO_FILENAME);
-				$new_file_name   = $orgin_file_name.'_'.uniqid().'.'.$picture->guessExtension();
-
-				try {
-					$picture->move($this->getParameter('upload_directory'), $new_file_name);
-				} catch (FileException $e) {
-					return new Response($e->getMessage());
-				}
-
-				$article->setPicture($new_file_name);                    
+			if($form->get('picture')->getData()){ 
+				$new_file_name = $this->uploadImage($form);
+				if($new_file_name["upload"])
+					$article->setPicture($new_file_name["new_file_name"]);     
 			}    
 
-			$em     = $this->getDoctrine()->getManager();
 			try {
-				$em->persist($article);
-				$em->flush();
+				$this->em->persist($article);
+				$this->em->flush();
 				$pass = true;
 			} catch (Exception $e) {
 				$this->addFlash(MessageConstant::ERROR_TYPE, $e);                
@@ -90,38 +88,27 @@ class BlogAdminController extends AbstractController
 	 */
 	public function edit(Article $article, Request $request)
 	{
-		$old_picture    = $article->getPicture();
+		$old_picture    = $article->getPicture();		
 		$form           = $this->createForm(ArticleType::class, $article);
-            # dd($form);
 		$form->handleRequest($request);
-
-            #
+        #
 		if( $form->isSubmitted() && $form->isValid() ){
 			if($article->getIsPublised())
 				$article->setPublicationDate(new \DateTime());
 			$article->setLastUpdateDate(new \DateTime());
-                # edit picture
-			if($article->getPicture() !== $old_picture && $article->getPicture() !== null){
-				$picture            = $form->get('picture')->getData();
-				$orgin_file_name    = pathinfo($picture->getClientOriginalName(), PATHINFO_FILENAME);
-				$new_file_name      = $orgin_file_name.'_'.uniqid().'.'.$picture->guessExtension();
-                    #
-				try {
-					$picture->move($this->getParameter('upload_directory'), $new_file_name);     
-				} catch (FileException $e) {
-					return new Response($e->getMessage());
-				} 
-
-				$article->setPicture($new_file_name);                
-                    # delete old picture
-				@unlink($this->getParameter('upload_directory').'/'.$old_picture);
-			}else{
+            # edit picture			
+			if( !is_null($form->get('picture')->getData()) ){
+				$new_file_name = $this->uploadImage($form, 'edit');			
+				
+				if($new_file_name["upload"]){
+					$article->setPicture($new_file_name["new_file_name"]);
+					@unlink($this->getParameter('upload_directory').'/'.$old_picture);
+				}
+			}else{ 
 				$article->setPicture($old_picture);
 			}
-
-			$em = $this->getDoctrine()->getManager(); 
-			$em->flush();
-
+				 
+			$this->em->flush();
 			return $this->redirectToRoute('admin');
 		}
 
@@ -137,11 +124,10 @@ class BlogAdminController extends AbstractController
 	public function remove(Article $article)
 	{
 
-		$em     = $this->getDoctrine()->getManager();
 		$pass   = false;
 		try {
-			$em->remove($article);
-			$em->flush();
+			$this->em->remove($article);
+			$this->em->flush();
 			$pass = true;        
 		} catch (Exception $error) {
                 # @toDo
@@ -151,4 +137,19 @@ class BlogAdminController extends AbstractController
 			$this->addFlash(MessageConstant::SUCCESS_TYPE, MessageConstant::SUPPRESSION_MESSAGE);
 		return $this->redirectToRoute('admin');
 	}
+
+	private function uploadImage($form, $action= 'add'){
+		$picture            = $form->get('picture')->getData();
+		$orgin_file_name    = pathinfo($picture->getClientOriginalName(), PATHINFO_FILENAME);
+		$new_file_name      = $orgin_file_name.'_'.uniqid().'.'.$picture->guessExtension();
+	    
+		try {
+			$picture->move($this->getParameter('upload_directory'), $new_file_name);     
+			return ["new_file_name"=> $new_file_name, "upload" => true];
+		} catch (FileException $e) {
+			return new Response($e->getMessage());
+		}                 
+
+	}
+
 }

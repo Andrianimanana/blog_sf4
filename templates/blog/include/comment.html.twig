@@ -10,7 +10,7 @@
 	</h5>
 	{% for comment in comments %}
 	<li class="collection-item avatar">
-		<img src="images/yuna.jpg" alt="" class="circle">
+		<img src="{{ asset('/upload/armel.jpg') }}" alt="" class="circle">
 		<span class="title">{{comment.user.nameuser}}</span>
 		<p>{{comment.comment}}</p>
 		<a href="#!" class="secondary-content">
@@ -21,7 +21,7 @@
 </ul>
 {% endif %}
 {{ form_start(form_com, {'action': path('comment', {'id':  article.id }),'attr' : {'id':'comment'}}) }}
-<div class="col s12 m12 l8 offset-l3">
+<div class="col s12 m12 l9 offset-l2">
 	<h5>Votre commentaire</h5>		
 	{{ form_widget(form_com.comment, {'attr':{'class':'materialize-textarea', 'placeholder':'Votre commentaire'}}) }}
 	<div class="row">
