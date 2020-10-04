@@ -84,3 +84,29 @@ nav {
 nav .nav-wrapper { 
     padding: 0 40px;
 }
+
+.commentaire.collection .collection-item.avatar .secondary-content{
+	top: initial;
+    right: 10px;
+}
+
+.commentaire .reply{
+	
+}
+
+.commentaire .more-reply{
+	font-size: 12px;
+	cursor: pointer;
+}
+
+ul[id*=content_reply]{
+	padding: 15px 0 0 25px;
+}
+ul[id*=content_reply] .reply{
+	padding: 8px 0;
+}
+.collection .collection-item ul[id*=content_reply] .reply .circle{
+    width: 25px;
+    height: 25px;
+    left: 62px;
+}

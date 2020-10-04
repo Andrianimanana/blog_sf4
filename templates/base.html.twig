@@ -44,15 +44,8 @@
 {% block body %}{% endblock %}
 	{% block javascripts %}
 		<script src="{{ asset('js/jquery.min.js') }}"></script>
-		<script src="{{ asset('js/materialize.min.js') }}"></script> 
-
-		<script type="text/javascript">
-		$('select').formSelect();	 
-		 
-		jQuery(document).ready(function(){
-			$(".dropdown-trigger").dropdown();
-	  });
-		</script>
+		<script src="{{ asset('js/materialize.min.js') }}"></script>
+		<script src="{{ asset('js/scripts.js') }}"></script>
 	{% endblock %}
 </body>
 </html>

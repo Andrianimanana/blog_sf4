@@ -12,6 +12,16 @@ comment:
     path: /comment/article/{id}
     controller: App\Controller\BlogController::comment
 
+show_reply:
+    path: /comment/{id}/show
+    controller: App\Controller\BlogController::replyComment
+
+comment_reply:
+    path: /comment/{id}/reply
+    controller: App\Controller\BlogController::replyComment
+display_reply:
+    path: /comment/{id}/display-reply
+    controller: App\Controller\BlogController::displayReply
 # route for admin only
 # 
 # admin:

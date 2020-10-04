@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,16 @@ class Comment
      * @ORM\Column(type="datetime")
      */
     private $dateComment;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reply::class, mappedBy="comment", cascade={"remove"})
+     */
+    private $replies;
+
+    public function __construct()
+    {
+        $this->replies = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -86,6 +98,37 @@ class Comment
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reply[]
+     */
+    public function getReplies(): Collection
+    {
+        return $this->replies;
+    }
+
+    public function addReply(Reply $reply): self
+    {
+        if (!$this->replies->contains($reply)) {
+            $this->replies[] = $reply;
+            $reply->setComment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReply(Reply $reply): self
+    {
+        if ($this->replies->contains($reply)) {
+            $this->replies->removeElement($reply);
+            // set the owning side to null (unless already changed)
+            if ($reply->getComment() === $this) {
+                $reply->setComment(null);
+            }
+        }
 
         return $this;
     }
