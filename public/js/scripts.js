@@ -40,6 +40,9 @@ const ajax_request = (url,data={},action,element,verif='',type='POST') =>	{
 		type: type,
 		data: data,
 		success: function(response, status){
+			if(response == "0")
+				return false
+			
 			if(action == 'reply_comment'){
 				if(verif == '' || verif == undefined)
 					return false;
@@ -62,8 +65,6 @@ const ajax_request = (url,data={},action,element,verif='',type='POST') =>	{
 				// insert html response après le DOM: $(element) 
 				$(response).insertAfter(element);		
 			}else if (action == 'display_reply') {
-				if(response == "0")
-					return false
 				// cache l'element repondre
 				if($(element).siblings('[id*=ID]').length){
 					$(element).siblings('[id*=ID]').hide();

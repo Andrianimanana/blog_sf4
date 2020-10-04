@@ -13,9 +13,11 @@
 		<img src="{{ asset('/upload/armel.jpg') }}" alt="" class="circle">
 		<span class="title">{{comment.user.nameuser}}</span>
 		<p>{{comment.comment}}</p>
-		<a id="ID{{ comment.id }}" href="#reply" class="secondary-content" onclick="replyComment(this);" data-url="{{ path('show_reply', {'id':comment.id}) }}">
-			<i class="material-icons blue-text">reply</i>
-		</a>
+		{% if app.user %}
+			<a id="ID{{ comment.id }}" href="#reply" class="secondary-content" onclick="replyComment(this);" data-url="{{ path('show_reply', {'id':comment.id}) }}">
+				<i class="material-icons blue-text">reply</i>
+			</a>
+		{% endif %}
 		{% if comment.replies.count  %}
 			<p class="more-reply" onclick="displayReply(this);" data-url="{{ path('display_reply', {'id':comment.id}) }}">
 				<a href="#more-reply">
@@ -31,12 +33,16 @@
 	{% endfor %}		
 </ul>
 {% endif %}
-{{ form_start(form_com, {'action': path('comment', {'id':  article.id }),'attr' : {'id':'comment'}}) }}
-<div class="col s12 m12 l9 offset-l2">
-	<h5>Votre commentaire</h5>		
-	{{ form_widget(form_com.comment, {'attr':{'class':'materialize-textarea', 'placeholder':'Votre commentaire'}}) }}
-	<div class="row">
-		<button class="btn btn-small">Enregistrer</button>
+
+{# formulaire commentaire #}
+{% if app.user %}
+	{{ form_start(form_com, {'action': path('comment', {'id':  article.id }),'attr' : {'id':'comment'}}) }}
+	<div class="col s12 m12 l9 offset-l2">
+		<h5>Votre commentaire</h5>		
+		{{ form_widget(form_com.comment, {'attr':{'class':'materialize-textarea', 'placeholder':'Votre commentaire'}}) }}
+		<div class="row">
+			<button class="btn btn-small">Enregistrer</button>
+		</div>
 	</div>
-</div>
-{{ form_end(form_com) }}
+	{{ form_end(form_com) }}
+{% endif %}

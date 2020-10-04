@@ -80,10 +80,14 @@ class BlogController extends AbstractController
         $form_reply->handleRequest($request);
         $action     = self::BLOG_CONST["display_form"];
         
+        if(!$this->getUser())
+            exit('0');
+
         if(null !== $request->request->get('reply') && array_key_exists("reply", $request->request->get('reply'))){
             $em = $this->getDoctrine()->getManager();
             $data = $request->request->get('reply');
             $reply->setReply($data['reply']);
+            $reply->setUser($this->getUser());
             $reply->setComment($comment);
             $reply->setLastupdate(new \DateTime());
             $em->persist($reply);

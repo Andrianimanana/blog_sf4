@@ -97,6 +97,8 @@ nav .nav-wrapper {
 .commentaire .more-reply{
 	font-size: 12px;
 	cursor: pointer;
+	text-align: right;
+	margin-right: 30px!important;
 }
 
 ul[id*=content_reply]{
