@@ -1,11 +1,17 @@
 $(document).ready(function(){
 	$(".dropdown-trigger").dropdown();
-	$('select').formSelect();	 
-});
+	$('select').formSelect();
+	$('.modal').modal();
+	// ajax: 
+	$(window).scroll(function(){
+		if(!$('div[id*=register]').length)
+			display_form_register();
+	});
 
-/**
- *************************** Ajax ***************************
- */
+});
+/*
+ ***************************** Ajax ***************************
+*/
 const replyComment 	= element => { 
 	let data 	= {};	
 	let url 	= location.href;
@@ -103,5 +109,38 @@ const display_only_form_reply = (element, url, data = {}) => {
 			let _html = $($.parseHTML(response)).children('.content-form-reply');
 			$(_elt).append(_html);
 		}
-	})
+	});
+
+	return false;
+}
+
+const display_form_register = () => {
+	// ($(window).scrollTop() + 150) >= $("#zone-commentaire").offset().top;
+	if ( !$("form#comment").length && ($(window).scrollTop() + $(window).height() + 30 >= $(document).height()) ){
+		
+		if($("div#register").length)
+			return false;
+		
+		$.post({
+			url: '/register',
+			data: {'action':'display_form'},
+			success: function(response,status){
+				
+				if(response == "0" || $('div[id*=register]').length)
+					return false;
+
+				$("#zone-commentaire").append($(response).filter('div[id*=register]'));
+				
+				if($("#zone-commentaire").length){
+					$('div[id*=register]')
+						.removeClass('row')
+						.addClass('collection col s12 m12 l9 offset-l2')
+						.find('.input-field').removeClass('l6 offset-l3')
+						.addClass('l12');
+				
+				}
+			}
+		});
+		return false;
+	}
 }

@@ -21,3 +21,8 @@
 
 ###> public/upload
 /public/upload 
+
+###> for eclipse
+.buildpath
+.project
+.settings/

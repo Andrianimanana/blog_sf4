@@ -3,6 +3,7 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
+<div id="register" class="row">
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
@@ -27,4 +28,5 @@
            </div>
        {{ form_end(registrationForm) }}
    </div>
+</div>
 {% endblock %}

@@ -112,3 +112,8 @@ ul[id*=content_reply] .reply{
     height: 25px;
     left: 62px;
 }
+
+#zone-commentaire #register h1{
+    font-size: 3em;
+    margin-top: 15px;
+}
