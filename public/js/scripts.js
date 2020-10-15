@@ -2,7 +2,7 @@ $(document).ready(function(){
 	$(".dropdown-trigger").dropdown();
 	$('select').formSelect();
 	$('.modal').modal();
-	// ajax: 
+	// ajax: show the form register if user is not log on
 	$(window).scroll(function(){
 		if(!$('div[id*=register]').length)
 			display_form_register();
@@ -55,15 +55,15 @@ const commendArticle = element => {
 	  return false;
 	const url 	= $(element).closest('form').attr('action');
 	const data 	= $(element).closest('form').serializeArray(); 
-	ajax_request(`${url}?ajax=comment_save`, data, 'comment_save',element);  
+	ajax_request(`${url}?ajax=comment_save`, 'comment_save', element, data);  
 	return false;
 };
 /**
  * 
  * @param {*} url 
- * @param {*} data 
  * @param {*} action 
  * @param {*} element 
+ * @param {*} data 
  * @param {*} verif 
  * @param {*} type 
  */
