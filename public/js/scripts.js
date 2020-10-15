@@ -12,6 +12,10 @@ $(document).ready(function(){
 /*
  ***************************** Ajax ***************************
 */
+/**
+ * 
+ * @param {*} element 
+ */
 const replyComment 	= element => { 
 	let data 	= {};	
 	let url 	= location.href;
@@ -31,7 +35,10 @@ const replyComment 	= element => {
 	
 	return false;
 }
-
+/**
+ * 
+ * @param {*} element 
+ */
 const displayReply	= element => {
 	if(!$(element).data('url'))
 		return false;
@@ -39,7 +46,27 @@ const displayReply	= element => {
 	ajax_request(url,{},'display_reply',element); 
 	return false;
 }	
-	
+/**
+ * 
+ * @param {*} element 
+ */
+const commendArticle = element => {
+	if(!$(element).closest('form').length && $(element).closest('form').attr('action') == '')
+	  return false;
+	const url 	= $(element).closest('form').attr('action');
+	const data 	= $(element).closest('form').serializeArray(); 
+	ajax_request(`${url}?ajax=comment_save`, data, 'comment_save',element);  
+	return false;
+}
+/**
+ * 
+ * @param {*} url 
+ * @param {*} data 
+ * @param {*} action 
+ * @param {*} element 
+ * @param {*} verif 
+ * @param {*} type 
+ */
 const ajax_request = (url,data={},action,element,verif='',type='POST') =>	{
 	$.ajax({
 		url: url,
@@ -89,13 +116,22 @@ const ajax_request = (url,data={},action,element,verif='',type='POST') =>	{
 				$(element).hide();
 				// ajax formulaire reponse
 						
-			}
+			}else if(action == 'comment_save'){
+				let zone_commentaire  = $(element).closest('#zone-commentaire');
+				$(zone_commentaire).find('#comment_list').remove();
+				$(zone_commentaire).prepend(response);
+			} 
 		}
 	});
 
 	return false;
 } 
-
+/**
+ * 
+ * @param {*} element 
+ * @param {*} url 
+ * @param {*} data 
+ */
 const display_only_form_reply = (element, url, data = {}) => {
 	
 	if($(element).siblings('ul[id*=content_reply]').find('.content-form-reply').length)
@@ -113,10 +149,13 @@ const display_only_form_reply = (element, url, data = {}) => {
 
 	return false;
 }
-
+/**
+ * 
+ */
 const display_form_register = () => {
 	// ($(window).scrollTop() + 150) >= $("#zone-commentaire").offset().top;
-	if ( !$("form#comment").length && ($(window).scrollTop() + $(window).height() + 30 >= $(document).height()) ){
+	let verif = $(window).scrollTop() + $(window).height() + 50 >= $(document).height()
+	if ( !$("form#comment").length && (verif) ){
 		
 		if($("div#register").length)
 			return false;

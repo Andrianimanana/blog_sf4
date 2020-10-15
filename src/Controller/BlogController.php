@@ -40,9 +40,7 @@ class BlogController extends AbstractController
         $new_com    = new Comment();
         $form_com   = $this->createForm(CommentType::class, $new_com);
         # list of comment on article
-        $list_com   = $this->getDoctrine()->getRepository(Comment::class)->findBy(
-            ["article" => $article->getId()]
-        ); 
+        $list_com   = $this->getListCommentArticle($article);
 
         return $this->render('blog/show.html.twig', [
 			'article'  => $article,
@@ -51,13 +49,19 @@ class BlogController extends AbstractController
 		]);		
     }
 
+    private function getListCommentArticle(Article $article){
+        return $this->getDoctrine()->getRepository(Comment::class)->findBy(
+            ["article" => $article->getId()]
+        ); 
+    }
+
     public function comment(Article $article, Comment $comment = null, Request $request){
 
         if(!$this->getUser() && $article){
             $this->addFlash(MessageConstant::ERROR_TYPE, MessageConstant::ERROR_AUTH_USER_MESSAGE);
             return $this->redirectToRoute('app_login');
         }
-
+        
         $em     = $this->getDoctrine()->getManager();
         $com    = $comment ?? new Comment();
         $form   = $this->createForm(CommentType::class, $com);
@@ -68,7 +72,15 @@ class BlogController extends AbstractController
             $com->setArticle($article);
             $com->setUser($this->getUser());
             $em->persist($com);
-            $em->flush(); 
+            $em->flush();
+            // ajax save comment article
+            if($request->query->get("ajax") && $request->query->get("ajax") == "comment_save"){
+                $comments = $this->getListCommentArticle($article);                 
+                return $this->render('blog/include/comment_list.html.twig', [
+                    'article'   => $article,
+                    'comments'  => $comments                    
+                ]);            
+            }
         }
 
         return $this->redirectToRoute('show_article', ['id' => $article->getId()]);
