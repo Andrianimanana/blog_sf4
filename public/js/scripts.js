@@ -82,7 +82,8 @@ const ajax_request = (url,data={},action,element,verif='',type='POST') =>	{
 				// cas : repondre à une commentaire
 				// insert html response dans le dernier reponse d'une commentaire
 				if($(element).closest('ul[id*=content_reply]').length){
-					$(response).insertBefore($(element).closest('form'));
+					$(response).insertBefore($(element).closest('form')); 
+					$(element).find("#reply_reply").val('');
 					return false;
 				}
 				// insert html response dans le DOM: $('ul[id*=content_reply]')
@@ -118,6 +119,7 @@ const ajax_request = (url,data={},action,element,verif='',type='POST') =>	{
 						
 			}else if(action == 'comment_save'){
 				let zone_commentaire  = $(element).closest('#zone-commentaire');
+				$(zone_commentaire).find('#comment_comment').val('');
 				$(zone_commentaire).find('#comment_list').remove();
 				$(zone_commentaire).prepend(response);
 			} 
