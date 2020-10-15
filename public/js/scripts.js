@@ -31,10 +31,10 @@ const replyComment 	= element => {
 		return false;		
 	} 	
 	
-	ajax_request(url,data,'reply_comment',element,verif); 
+	ajax_request(url, 'reply_comment', element, data, verif); 
 	
 	return false;
-}
+};
 /**
  * 
  * @param {*} element 
@@ -43,9 +43,9 @@ const displayReply	= element => {
 	if(!$(element).data('url'))
 		return false;
 	let url 	= $(element).data('url');
-	ajax_request(url,{},'display_reply',element); 
+	ajax_request(url, 'display_reply', element, {}); 
 	return false;
-}	
+};	
 /**
  * 
  * @param {*} element 
@@ -57,7 +57,7 @@ const commendArticle = element => {
 	const data 	= $(element).closest('form').serializeArray(); 
 	ajax_request(`${url}?ajax=comment_save`, data, 'comment_save',element);  
 	return false;
-}
+};
 /**
  * 
  * @param {*} url 
@@ -67,14 +67,14 @@ const commendArticle = element => {
  * @param {*} verif 
  * @param {*} type 
  */
-const ajax_request = (url,data={},action,element,verif='',type='POST') =>	{
+const ajax_request = (url, action, element, data = {},verif='',type='POST') =>	{
 	$.ajax({
 		url: url,
 		type: type,
 		data: data,
 		success: function(response, status){
 			if(response == "0")
-				return false
+				return false;
 			
 			if(action == 'reply_comment'){
 				if(verif == '' || verif == undefined)
@@ -127,7 +127,7 @@ const ajax_request = (url,data={},action,element,verif='',type='POST') =>	{
 	});
 
 	return false;
-} 
+};
 /**
  * 
  * @param {*} element 
@@ -150,13 +150,13 @@ const display_only_form_reply = (element, url, data = {}) => {
 	});
 
 	return false;
-}
+};
 /**
  * 
  */
 const display_form_register = () => {
 	// ($(window).scrollTop() + 150) >= $("#zone-commentaire").offset().top;
-	let verif = $(window).scrollTop() + $(window).height() + 50 >= $(document).height()
+	let verif = $(window).scrollTop() + $(window).height() + 50 >= $(document).height();
 	if ( !$("form#comment").length && (verif) ){
 		
 		if($("div#register").length)
@@ -184,4 +184,4 @@ const display_form_register = () => {
 		});
 		return false;
 	}
-}
+};
