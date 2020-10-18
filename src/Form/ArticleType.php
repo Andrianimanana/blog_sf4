@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
  
 
 class ArticleType extends AbstractType
@@ -24,7 +25,7 @@ class ArticleType extends AbstractType
                 'data_class'    => null
             ])
             ->add('title', TextType::class, ['required'=> false])
-            ->add('content', TextareaType::class, ['required'=> false])
+            ->add('content', CKEditorType::class, ['required'=> false])
             #->add('publicationDate')
             #->add('lastUpdateDate')
             ->add('isPublised', CheckboxType::class, ['required'=> false])
