@@ -103,7 +103,7 @@ class BlogAdminController extends AbstractController
 				
 				if($new_file_name["upload"]){
 					$article->setPicture($new_file_name["new_file_name"]);
-					@unlink($this->getParameter('upload_directory').'/'.$old_picture);
+					@unlink($this->getParameter('app.dir.upload').'/'.$old_picture);
 				}
 			}else{ 
 				$article->setPicture($old_picture);
@@ -145,7 +145,7 @@ class BlogAdminController extends AbstractController
 		$new_file_name      = $orgin_file_name.'_'.uniqid().'.'.$picture->guessExtension();
 	    
 		try {
-			$picture->move($this->getParameter('upload_directory'), $new_file_name);     
+			$picture->move($this->getParameter('app.dir.upload'), $new_file_name);     
 			return ["new_file_name"=> $new_file_name, "upload" => true];
 		} catch (FileException $e) {
 			return new Response($e->getMessage());

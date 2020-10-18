@@ -76,7 +76,7 @@ class BlogController extends AbstractController
             // ajax save comment article
             if($request->query->get("ajax") && $request->query->get("ajax") == "comment_save"){
                 $comments = $this->getListCommentArticle($article);                 
-                return $this->render('blog/include/comment_list.html.twig', [
+                return $this->render('blog/include/_comment_list.html.twig', [
                     'article'   => $article,
                     'comments'  => $comments                    
                 ]);            

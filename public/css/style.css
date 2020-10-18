@@ -1,9 +1,3 @@
-/* navbar */
-nav {
-	/*background-color: #d4b672;*/
-	/*margin-bottom: 30px;*/
-}
-
 /* article card */
 .article-card {
 	margin-bottom: 30px;
@@ -90,8 +84,9 @@ nav .nav-wrapper {
     right: 10px;
 }
 
-.commentaire .reply{
-	
+.article-card h2{
+	height: 45px;
+	overflow: hidden;
 }
 
 .commentaire .more-reply{
