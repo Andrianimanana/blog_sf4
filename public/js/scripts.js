@@ -25,7 +25,7 @@ const scroll_infini = () => {
 		pagination:'.pagination',
 		delay: 1600		
 	}).extension(new IASSpinnerExtension({
-		src:'../images/spinner4.gif' // optionally
+		src:'../images/spinner3.gif' // optionally
 	}));		
 }
 

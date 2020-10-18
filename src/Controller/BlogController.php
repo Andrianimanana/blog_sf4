@@ -22,7 +22,7 @@ class BlogController extends AbstractController
         'display_reply' => 'display_reply',
         'display_form'  => 'display_form',
         'show_comment'  => 'show_comment',
-        'nb_per_page'   => 12
+        'nb_per_page'   => 20
     ];
      
     public function index(PaginatorInterface $paginator, Request $request)
