@@ -4,14 +4,32 @@ $(document).ready(function(){
 	$('.modal').modal();
 	// ajax: show the form register if user is not log on
 	$(window).scroll(function(){
-		if(!$('div[id*=register]').length)
-			display_form_register();
+		if(!$('div[id*=register]').length && $("#zone-commentaire").length)
+		 	display_form_register();
 	});
-
+	// ajax scroll infini using InfiniteAjaxScroll v2.3.1
+	scroll_infini();
 });
 /*
  ***************************** Ajax ***************************
 */
+
+/**
+ * ajax scroll infini
+ */
+const scroll_infini = () => {
+	jQuery.ias({
+		item:'.article',
+		container:'#list-articles',
+		next:'.next > a',
+		pagination:'.pagination',
+		delay: 1600		
+	}).extension(new IASSpinnerExtension({
+		src:'../images/spinner4.gif' // optionally
+	}));		
+}
+
+
 /**
  * 
  * @param {*} element 
