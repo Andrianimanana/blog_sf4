@@ -4,48 +4,58 @@
 	<meta charset="UTF-8">
 	<title>{% block title %}Blog{% endblock %}</title> 
 	<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-	{% block stylesheets %} 
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/icon.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/materialize.min.css') }}">
+	{% block stylesheets %}
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+	{# bootstrap #}
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/compiled-4.19.1.min.css') }}">
 	{% endblock %}
 </head>
 <body>
-<!-- Dropdown Structure -->
-<ul id="dropdown1" class="dropdown-content">
-	<li><a href="#!">sub menu</a></li> 
-	<li class="divider"></li>
-	<li>			
-		{% if not app.user %}
-			<a href="{{ path('app_login') }}"><i class="material-icons">login</i>Se connecter</a>
-		{% else %}
-			<a href="{{ path('app_logout') }}"><i class="material-icons">logout</i>Se Déconnecter</a>
-		{% endif %}  
-	</li>
-</ul>
-<nav>
-	<div class="nav-wrapper">
-		<a href="{{ path('homepage') }}" class="brand-logo"><i class="material-icons">menu</i>Blog ~ sf4</a>
-		<ul class="right hide-on-med-and-down">
-			<li>
-				{% if app.user %}
-					<a class="col s8 btn-flat dropdown-button waves-effect waves-light white-text" href="#" data-activates="profile-dropdown">{{app.user.nameuser}}<i class="mdi-navigation-arrow-drop-down right"></i></a>
-				{% endif %}
+<!--Navbar-->
+<nav class="navbar red mb-4">
+		<!-- Navbar brand -->
+		<a id="logo" class="navbar-brand" href="#"><img src="{{ asset('images/symfony.png') }}" alt="Logo"></a>
+		<!-- Collapse button -->
+		<button class="navbar-toggler second-button" type="button" data-toggle="collapse" data-target="#navAfficheo">
+		<div class="animated-icon2"><span></span><span></span><span></span><span></span></div>
+	</button>
+
+	<!-- search -->
+	<form class="form-inline">
+		<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+	</form>
+
+	<!-- Collapsible content -->
+	<div class="collapse navbar-collapse bg-white" id="navAfficheo">
+		<!-- Links -->
+		<ul id="menu-list" class="navbar-nav mr-auto py-2">
+			<li class="nav-item active">
+				{% if not app.user %}
+					<a href="{{ path('app_login') }}" class="nav-link pl-2">Se connecter<span class="sr-only">(current)</span></a>
+				{% else %}
+					<a href="{{ path('app_logout') }}"  class="nav-link pl-2">Se Déconnecter</a>
+				{% endif %} 
 			</li>
-			<li><a href="badges.html">Components</a></li>
-			<!-- Dropdown Trigger -->
-			<li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+			<li class="nav-item">
+				<a class="nav-link pl-2" href="#">Actualités</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link pl-2" href="#">Qui suis-je ?</a>
+			</li>
 		</ul>
 	</div>
-</nav>  
+</nav>
 <!-- message  success || error || infos-->
 {% include 'blog/include/_message.html.twig' %}
 
 {% block body %}{% endblock %}
 	{% block javascripts %}
-		<script src="{{ asset('js/jquery.min.js') }}"></script>
-		<script src="{{ asset('js/materialize.min.js') }}"></script>
+		<script src="{{ asset('js/jquery.min.js') }}"></script> 
 		<script src="{{ asset('js/scripts.js') }}"></script>
+		{# bootstrap #}
+		<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+		{# end bootstrap #}
 		{# jquery-ias #}
 		<script src="{{ asset('js/jquery-ias/jquery-ias.js') }}"></script>
 		<script src="{{ asset('js/jquery-ias/callbacks.js') }}"></script>

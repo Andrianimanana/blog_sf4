@@ -1,7 +1,8 @@
 $(document).ready(function(){
-	$(".dropdown-trigger").dropdown();
-	$('select').formSelect();
-	$('.modal').modal();
+	$('.second-button').on('click', function () {
+		$('.animated-icon2').toggleClass('open');
+	});
+	
 	// ajax: show the form register if user is not log on
 	$(window).scroll(function(){
 		if(!$('div[id*=register]').length && $("#zone-commentaire").length)
@@ -25,7 +26,8 @@ const scroll_infini = () => {
 		pagination:'.pagination',
 		delay: 1600		
 	}).extension(new IASSpinnerExtension({
-		src:'../images/spinner3.gif' // optionally
+		//src:'../images/spinner3.gif' // optionally
+		html: '<div class="ias-spinner mx-auto d-block"><img src="../images/spinner4.gif"/></div>'
 	}));		
 }
 
