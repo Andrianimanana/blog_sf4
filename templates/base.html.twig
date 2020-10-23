@@ -14,11 +14,11 @@
 	{% endblock %}
 </head>
 <body>
-{% include 'blog/include/_header.html.twig' %}
+{% include 'global/_header.html.twig' %}
 <!-- message  success || error || infos-->
-{% include 'blog/include/_message.html.twig' %}
+{% include 'global/_message.html.twig' %}
 {% block body %}{% endblock %}
-{% include 'blog/include/_footer.html.twig' %}
+{% include 'global/_footer.html.twig' %}
 {% block javascripts %}
 	<script src="{{ asset('js/jquery.min.js') }}"></script> 
 	<script src="{{ asset('js/scripts.js') }}"></script>

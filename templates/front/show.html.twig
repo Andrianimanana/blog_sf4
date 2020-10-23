@@ -1,4 +1,3 @@
-{# templates/blog/show.html.twig #}
 {% extends "base.html.twig" %}
 
 {% block title %}{{ parent()}} | {{ article.getTitle() }}{% endblock %}
@@ -28,7 +27,7 @@
 	</div> 
 	{# zone commentaire #}
 	<div id="zone-commentaire" class="row">
-		{% include 'blog/include/_comment.html.twig' %}
+		{% include 'front/include/_comment.html.twig' %}
 	</div>		
 </article>
 {% endblock %}

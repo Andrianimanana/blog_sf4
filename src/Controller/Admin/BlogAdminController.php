@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -78,7 +78,7 @@ class BlogAdminController extends AbstractController
 			return $this->redirectToRoute('admin');
 		}
 
-		return $this->render('blog/add.html.twig', [
+		return $this->render('admin/add.html.twig', [
 			'form'      => $form->createView(),
 			'article'   => $article
 		]);		    	
@@ -113,7 +113,7 @@ class BlogAdminController extends AbstractController
 			return $this->redirectToRoute('admin');
 		}
 
-		return $this->render('blog/edit.html.twig', [
+		return $this->render('admin/edit.html.twig', [
 			'article'   => $article,
 			'form'      => $form->createView()
 		]);		

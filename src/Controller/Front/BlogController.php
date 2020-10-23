@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Front;
 
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,7 +36,7 @@ class BlogController extends AbstractController
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
             self::BLOG_CONST['nb_per_page'] // Nombre de résultats par page
         );
-        return $this->render('blog/index.html.twig', [
+        return $this->render('front/index.html.twig', [
             'articles' => $articles_pagined,
         ]);
     }
@@ -49,7 +49,7 @@ class BlogController extends AbstractController
         # list of comment on article
         $list_com   = $this->getListCommentArticle($article);
 
-        return $this->render('blog/show.html.twig', [
+        return $this->render('front/show.html.twig', [
 			'article'  => $article,
             "comments" => $list_com,
             'form_com' => $form_com->createView()
@@ -83,7 +83,7 @@ class BlogController extends AbstractController
             // ajax save comment article
             if($request->query->get("ajax") && $request->query->get("ajax") == "comment_save"){
                 $comments = $this->getListCommentArticle($article);                 
-                return $this->render('blog/include/_comment_list.html.twig', [
+                return $this->render('front/include/_comment_list.html.twig', [
                     'article'   => $article,
                     'comments'  => $comments                    
                 ]);            
@@ -114,7 +114,7 @@ class BlogController extends AbstractController
             $action = self::BLOG_CONST["show_comment"]; 
         }
             
-        return $this->render('blog/reply.html.twig', [
+        return $this->render('front/reply.html.twig', [
             'reply'         => $reply,
             'comment'       => $comment,
             'action'        => $action,
@@ -128,7 +128,7 @@ class BlogController extends AbstractController
             $reply      = new Reply();
             $form_reply = $this->createForm(ReplyType::class, $reply);
             
-            return $this->render('blog/reply.html.twig', [
+            return $this->render('front/reply.html.twig', [
                 'comment'   => $comment,
                 'action'    => self::BLOG_CONST["display_form"],
                 'form_reply'=> $form_reply->createView()
@@ -139,7 +139,7 @@ class BlogController extends AbstractController
             if(!$replies->count())
                 exit("0");  
             
-            return $this->render('blog/reply.html.twig', [
+            return $this->render('front/reply.html.twig', [
                 'replies'   => $replies,
                 'comment'   => $comment,
                 'action'    => self::BLOG_CONST["display_reply"]
