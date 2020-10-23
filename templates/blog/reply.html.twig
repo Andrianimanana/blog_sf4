@@ -21,7 +21,7 @@
 	{% endif %}	
 {% endif %}
 {# si afficher les reponses #}
- {% if action == 'display_reply' %}
+{% if action == 'display_reply' %}
 	<ul id="content_reply{{ comment.id }}">
 		{% for reply in replies %}
 		    <li class="reply">
@@ -31,4 +31,4 @@
 			</li>
 		{% endfor %}
 	</ul>
- {% endif %}
+{% endif %}

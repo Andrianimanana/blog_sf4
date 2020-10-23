@@ -14,57 +14,24 @@
 	{% endblock %}
 </head>
 <body>
-<!--Navbar-->
-<nav class="navbar red mb-4">
-		<!-- Navbar brand -->
-		<a id="logo" class="navbar-brand" href="#"><img src="{{ asset('images/symfony.png') }}" alt="Logo"></a>
-		<!-- Collapse button -->
-		<button class="navbar-toggler second-button" type="button" data-toggle="collapse" data-target="#navAfficheo">
-		<div class="animated-icon2"><span></span><span></span><span></span><span></span></div>
-	</button>
-
-	<!-- search -->
-	<form class="form-inline">
-		<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-	</form>
-
-	<!-- Collapsible content -->
-	<div class="collapse navbar-collapse bg-white" id="navAfficheo">
-		<!-- Links -->
-		<ul id="menu-list" class="navbar-nav mr-auto py-2">
-			<li class="nav-item active">
-				{% if not app.user %}
-					<a href="{{ path('app_login') }}" class="nav-link pl-2">Se connecter<span class="sr-only">(current)</span></a>
-				{% else %}
-					<a href="{{ path('app_logout') }}"  class="nav-link pl-2">Se Déconnecter</a>
-				{% endif %} 
-			</li>
-			<li class="nav-item">
-				<a class="nav-link pl-2" href="#">Actualités</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link pl-2" href="#">Qui suis-je ?</a>
-			</li>
-		</ul>
-	</div>
-</nav>
+{% include 'blog/include/_header.html.twig' %}
 <!-- message  success || error || infos-->
 {% include 'blog/include/_message.html.twig' %}
-
 {% block body %}{% endblock %}
-	{% block javascripts %}
-		<script src="{{ asset('js/jquery.min.js') }}"></script> 
-		<script src="{{ asset('js/scripts.js') }}"></script>
-		{# bootstrap #}
-		<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-		{# end bootstrap #}
-		{# jquery-ias #}
-		<script src="{{ asset('js/jquery-ias/jquery-ias.js') }}"></script>
-		<script src="{{ asset('js/jquery-ias/callbacks.js') }}"></script>
-		<script src="{{ asset('js/jquery-ias/extension/spinner.js') }}"></script>
-		{# end jquery-ias #}
-		{# use webpack #}
-		{{ encore_entry_script_tags('app') }}
-	{% endblock %}
+{% include 'blog/include/_footer.html.twig' %}
+{% block javascripts %}
+	<script src="{{ asset('js/jquery.min.js') }}"></script> 
+	<script src="{{ asset('js/scripts.js') }}"></script>
+	{# bootstrap #}
+	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+	{# end bootstrap #}
+	{# jquery-ias #}
+	<script src="{{ asset('js/jquery-ias/jquery-ias.js') }}"></script>
+	<script src="{{ asset('js/jquery-ias/callbacks.js') }}"></script>
+	<script src="{{ asset('js/jquery-ias/extension/spinner.js') }}"></script>
+	{# end jquery-ias #}
+	{# use webpack #}
+	{{ encore_entry_script_tags('app') }}
+{% endblock %}
 </body>
 </html>
