@@ -4,28 +4,28 @@
 {% block title %}{{ parent()}} | {{ article.getTitle() }}{% endblock %}
 
 {% block body %}
-<article class="container">
+<article id="detail-article" class="container">
 	<div class="row">
-		<div class="col s12 m12 l8 offset-l2">
-			<h2>{{ article.getTitle() }}</h2>
-			<span>{{ article.getPublicationDate()|date('d/m/Y') }}</span>
-			<p>
-				<img src="{{ asset('upload/'~article.getPicture()) }}" class="responsive-img">
-			</p>
-			<span class="categories">
-				{% for category in article.categories %}
-				{{ category.libele }} {{ loop.last ? "" : "," }}
-				{% endfor %}
-			</span>
+		<div class="d-flex flex-column justify-content-center align-items-center">
+			<div class="col-md-6">
+				<h2>{{ article.getTitle() }}</h2>
+				<span>{{ article.getPublicationDate()|date('d/m/Y') }}</span>
+				<p>
+					<img src="{{ asset('upload/'~article.getPicture()) }}" class="img-fluid">
+				</p>
+				<span class="categories">
+					{% for category in article.categories %}
+					{{ category.libele }} {{ loop.last ? "" : "," }}
+					{% endfor %}
+				</span>
+			</div>
+			<div class="col-md-6 text-justify">
+				<p>
+					{{ article.getContent() }}
+				</p>
+			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col s12 m12 l8 offset-l2">
-			<p>
-				{{ article.getContent() }}
-			</p>
-		</div>
-	</div>
+	</div> 
 	{# zone commentaire #}
 	<div id="zone-commentaire" class="row">
 		{% include 'blog/include/_comment.html.twig' %}

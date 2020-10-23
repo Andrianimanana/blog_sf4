@@ -1,3 +1,4 @@
+@import 'fontawesome-free/css/all.css';
 ._message{
 	padding: 2px;
     width: 100%;
@@ -51,7 +52,7 @@ ul[id*=content_reply] .reply{
 
 #zone-commentaire #register h1{
     font-size: 3em;
-    margin-top: 15px;
+    /* margin-top: 15px; */
 }
 
 /* bootstrap4 */
