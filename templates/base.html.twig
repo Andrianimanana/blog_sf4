@@ -9,6 +9,8 @@
 	{# bootstrap #}
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/compiled-4.19.1.min.css') }}">
+	{# webpack #}
+	{{ encore_entry_link_tags('app') }}
 	{% endblock %}
 </head>
 <body>
@@ -61,6 +63,8 @@
 		<script src="{{ asset('js/jquery-ias/callbacks.js') }}"></script>
 		<script src="{{ asset('js/jquery-ias/extension/spinner.js') }}"></script>
 		{# end jquery-ias #}
+		{# use webpack #}
+		{{ encore_entry_script_tags('app') }}
 	{% endblock %}
 </body>
 </html>
