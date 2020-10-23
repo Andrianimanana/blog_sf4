@@ -194,8 +194,8 @@ const display_form_register = () => {
 				
 				if($("#zone-commentaire").length){
 					$('div[id*=register]')
-						.removeClass('row')
-						.addClass('collection col s12 m12 l9 offset-l2')
+						// .removeClass('row')
+						// .addClass('col-md-6')
 						.find('.input-field').removeClass('l6 offset-l3')
 						.addClass('l12');
 				
