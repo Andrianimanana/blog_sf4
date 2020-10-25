@@ -6,7 +6,7 @@ $(document).ready(function(){
 	// ajax: show the form register if user is not log on
 	$(window).scroll(function(){
 		if(!$('div[id*=register]').length && $("#zone-commentaire").length)
-		 	display_form_register();
+		display_form_register();
 	});
 	// ajax scroll infini using InfiniteAjaxScroll v2.3.1
 	scroll_infini();
@@ -19,16 +19,19 @@ $(document).ready(function(){
  * ajax scroll infini
  */
 const scroll_infini = () => {
-	jQuery.ias({
-		item:'.article',
-		container:'#list-articles',
-		next:'.next > a',
-		pagination:'.pagination',
-		delay: 1600		
-	}).extension(new IASSpinnerExtension({
-		//src:'../images/spinner3.gif' // optionally
-		html: '<div class="ias-spinner mx-auto d-block"><img src="../images/spinner4.gif"/></div>'
-	}));		
+	$('#list-articles').jscroll({
+		loadingHtml: '<div class="ias-spinner mx-auto d-block"><img src="../images/spinner4.gif"/></div>',
+		padding: 20,
+		nextSelector: '.next > a',
+		contentSelector: '.article',
+		pagingSelector: '._cont_pagination',
+		callback: function(){
+			const parent = $('.jscroll-added');
+			const childs = $(parent).children().clone();
+			$(parent).remove();
+			$(".jscroll-inner").append(childs);
+		}
+	});		
 }
 
 

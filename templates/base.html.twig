@@ -6,10 +6,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 	{% block stylesheets %}
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
-	{# bootstrap #}
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/compiled-4.19.1.min.css') }}">
-	{# webpack #}
+	{# webpack-encore #}
 	{{ encore_entry_link_tags('app') }}
 	{% endblock %}
 </head>
@@ -20,17 +17,7 @@
 {% block body %}{% endblock %}
 {% include 'global/_footer.html.twig' %}
 {% block javascripts %}
-	<script src="{{ asset('js/jquery.min.js') }}"></script> 
-	<script src="{{ asset('js/scripts.js') }}"></script>
-	{# bootstrap #}
-	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-	{# end bootstrap #}
-	{# jquery-ias #}
-	<script src="{{ asset('js/jquery-ias/jquery-ias.js') }}"></script>
-	<script src="{{ asset('js/jquery-ias/callbacks.js') }}"></script>
-	<script src="{{ asset('js/jquery-ias/extension/spinner.js') }}"></script>
-	{# end jquery-ias #}
-	{# use webpack #}
+	{# use webpack-encore #}
 	{{ encore_entry_script_tags('app') }}
 {% endblock %}
 </body>
