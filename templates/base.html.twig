@@ -4,8 +4,7 @@
 	<meta charset="UTF-8">
 	<title>{% block title %}Blog{% endblock %}</title> 
 	<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-	{% block stylesheets %}
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+	{% block stylesheets %} 
 	{# webpack-encore #}
 	{{ encore_entry_link_tags('app') }}
 	{% endblock %}
