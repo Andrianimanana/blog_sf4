@@ -32,14 +32,14 @@ const scroll_infini = () => {
 			$(".jscroll-inner").append(childs);
 		}
 	});		
-}
+};
 
 
 /**
  * 
  * @param {*} element 
  */
-const replyComment 	= element => { 
+window.replyComment 	= element => { 
 	let data 	= {};	
 	let url 	= location.href;
 	let $elt_id = $(element).attr('id');
@@ -62,7 +62,7 @@ const replyComment 	= element => {
  * 
  * @param {*} element 
  */
-const displayReply	= element => {
+window.displayReply = element => {
 	if(!$(element).data('url'))
 		return false;
 	let url 	= $(element).data('url');
@@ -73,7 +73,7 @@ const displayReply	= element => {
  * 
  * @param {*} element 
  */
-const commendArticle = element => {
+window.commendArticle = element => {
 	if(!$(element).closest('form').length && $(element).closest('form').attr('action') == '')
 	  return false;
 	const url 	= $(element).closest('form').attr('action');
@@ -90,7 +90,7 @@ const commendArticle = element => {
  * @param {*} verif 
  * @param {*} type 
  */
-const ajax_request = (url, action, element, data = {},verif='',type='POST') =>	{
+window.ajax_request = (url, action, element, data = {}, verif = '', type = 'POST') => {
 	$.ajax({
 		url: url,
 		type: type,
@@ -157,7 +157,7 @@ const ajax_request = (url, action, element, data = {},verif='',type='POST') =>	{
  * @param {*} url 
  * @param {*} data 
  */
-const display_only_form_reply = (element, url, data = {}) => {
+window.display_only_form_reply = (element, url, data = {}) => {
 	
 	if($(element).siblings('ul[id*=content_reply]').find('.content-form-reply').length)
 		return false;
@@ -177,7 +177,7 @@ const display_only_form_reply = (element, url, data = {}) => {
 /**
  * 
  */
-const display_form_register = () => {
+window.display_form_register = () => {
 	// ($(window).scrollTop() + 150) >= $("#zone-commentaire").offset().top;
 	let verif = $(window).scrollTop() + $(window).height() + 50 >= $(document).height();
 	if ( !$("form#comment").length && (verif) ){
