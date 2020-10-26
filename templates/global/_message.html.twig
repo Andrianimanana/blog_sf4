@@ -1,0 +1,10 @@
+<div class="row">
+	<div class="col s12">
+	  {% for message in app.flashes('error') %}
+	      <span class="_message red darken-1">{{ message }}</span>
+	  {% endfor %}
+	  {% for message in app.flashes('success') %}
+	      <span class="_message light-green accent-4">{{ message }}</span>
+	  {% endfor %}
+	</div>
+</div>

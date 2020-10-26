@@ -1,0 +1,13 @@
+{# liste commentaire #}
+{% include 'front/include/_comment_list.html.twig' %}
+
+{# formulaire commentaire #}
+{% if app.user %}
+	{{ form_start(form_com, {'action': path('comment', {'id':  article.id }),'attr' : {'id':'comment', 'class' : 'p-2' ,'onsubmit':'return commendArticle(this);'}}) }}
+	<div class="col s12 py-2 bg-light">
+		<h5>Votre commentaire</h5>		
+		{{ form_widget(form_com.comment, {'attr':{'class':'form-control', 'placeholder':'Votre commentaire'}}) }}
+		<button class="btn btn-primary btn-small ml-auto my-2">Enregistrer</button>
+	</div>
+	{{ form_end(form_com) }}
+{% endif %}

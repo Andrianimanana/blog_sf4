@@ -23,6 +23,9 @@
     "doctrine/common": {
         "version": "3.0.2"
     },
+    "doctrine/data-fixtures": {
+        "version": "1.4.4"
+    },
     "doctrine/dbal": {
         "version": "2.10.2"
     },
@@ -39,6 +42,18 @@
             "config/packages/prod/doctrine.yaml",
             "src/Entity/.gitignore",
             "src/Repository/.gitignore"
+        ]
+    },
+    "doctrine/doctrine-fixtures-bundle": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "e5b542d4ef47d8a003c91beb35650c76907f7e53"
+        },
+        "files": [
+            "src/DataFixtures/AppFixtures.php"
         ]
     },
     "doctrine/doctrine-migrations-bundle": {
@@ -81,8 +96,51 @@
     "doctrine/sql-formatter": {
         "version": "1.1.1"
     },
+    "easycorp/easyadmin-bundle": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "0a51040a43c6f2172a3a0135cd15daf2043905d7"
+        },
+        "files": [
+            "config/packages/easy_admin.yaml",
+            "config/routes/easy_admin.yaml"
+        ]
+    },
     "egulias/email-validator": {
         "version": "2.1.19"
+    },
+    "friendsofsymfony/ckeditor-bundle": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "8eb1cd0962ded6a6d6e1e5a9b6d3e888f9f94ff6"
+        },
+        "files": [
+            "config/packages/fos_ckeditor.yaml"
+        ]
+    },
+    "fzaninotto/faker": {
+        "version": "v1.9.1"
+    },
+    "knplabs/knp-components": {
+        "version": "v2.4.2"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.3.0"
+    },
+    "laminas/laminas-code": {
+        "version": "3.4.1"
+    },
+    "laminas/laminas-eventmanager": {
+        "version": "3.2.1"
+    },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.1.1"
     },
     "monolog/monolog": {
         "version": "1.25.5"
@@ -94,7 +152,7 @@
         "version": "2.2.3"
     },
     "php": {
-        "version": "7.2"
+        "version": "7.3"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
@@ -180,6 +238,9 @@
     },
     "symfony/dependency-injection": {
         "version": "v4.4.11"
+    },
+    "symfony/deprecation-contracts": {
+        "version": "v2.2.0"
     },
     "symfony/doctrine-bridge": {
         "version": "v4.4.11"
@@ -324,6 +385,9 @@
             "tests/bootstrap.php"
         ]
     },
+    "symfony/polyfill-intl-grapheme": {
+        "version": "v1.18.1"
+    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.18.1"
     },
@@ -343,6 +407,9 @@
         "version": "v1.18.1"
     },
     "symfony/polyfill-php80": {
+        "version": "v1.18.1"
+    },
+    "symfony/polyfill-uuid": {
         "version": "v1.18.1"
     },
     "symfony/process": {
@@ -407,6 +474,9 @@
     "symfony/stopwatch": {
         "version": "v4.4.11"
     },
+    "symfony/string": {
+        "version": "v5.1.5"
+    },
     "symfony/test-pack": {
         "version": "v1.0.6"
     },
@@ -445,6 +515,9 @@
     },
     "symfony/twig-pack": {
         "version": "v1.0.0"
+    },
+    "symfony/uid": {
+        "version": "v5.1.5"
     },
     "symfony/validator": {
         "version": "4.3",
@@ -490,6 +563,25 @@
             "version": "3.3",
             "ref": "dae9b39fd6717970be7601101ce5aa960bf53d9a"
         }
+    },
+    "symfony/webpack-encore-bundle": {
+        "version": "1.6",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.6",
+            "ref": "69e1d805ad95964088bd510c05995e87dc391564"
+        },
+        "files": [
+            "assets/app.js",
+            "assets/styles/app.css",
+            "config/packages/assets.yaml",
+            "config/packages/prod/webpack_encore.yaml",
+            "config/packages/test/webpack_encore.yaml",
+            "config/packages/webpack_encore.yaml",
+            "package.json",
+            "webpack.config.js"
+        ]
     },
     "symfony/yaml": {
         "version": "v4.4.11"

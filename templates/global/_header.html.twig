@@ -1,0 +1,34 @@
+<!--Navbar-->
+<nav class="navbar red mb-4">
+		<!-- Navbar brand -->
+		<a id="logo" class="navbar-brand" href="{{ path('homepage') }}"><img src="{{ asset('images/symfony.png') }}" alt="Logo"></a>
+		<!-- Collapse button -->
+		<button class="navbar-toggler second-button" type="button" data-toggle="collapse" data-target="#navAfficheo">
+		<div class="animated-icon2"><span></span><span></span><span></span><span></span></div>
+	</button>
+
+	<!-- search -->
+	<form class="form-inline">
+		<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+	</form>
+
+	<!-- Collapsible content -->
+	<div class="collapse navbar-collapse bg-white" id="navAfficheo">
+		<!-- Links -->
+		<ul id="menu-list" class="navbar-nav mr-auto py-2">
+			<li class="nav-item active">
+				{% if not app.user %}
+					<a href="{{ path('app_login') }}" class="nav-link pl-2">Se connecter<span class="sr-only">(current)</span></a>
+				{% else %}
+					<a href="{{ path('app_logout') }}"  class="nav-link pl-2">Se Déconnecter</a>
+				{% endif %} 
+			</li>
+			<li class="nav-item">
+				<a class="nav-link pl-2" href="#">Actualités</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link pl-2" href="#">Qui suis-je ?</a>
+			</li>
+		</ul>
+	</div>
+</nav>

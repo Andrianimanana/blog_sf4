@@ -1,0 +1,34 @@
+{# templates/blog/reply.html.twig #}
+{# 
+	############################## AJAX ############################## 
+#}
+{% if action == 'show_comment' %} {# si repondre #}
+	<li class="reply">
+    	<img src="{{ asset('/upload/armel.jpg') }}" alt="" class="rounded-circle">
+		<span class="title"><strong>{{reply.user.nameuser}} : </strong></span>
+    	{{ reply.getReply() }}
+	</li>
+{% elseif action == 'display_form' %}{# si afficher formulaire reponse #}
+	{% if app.user %}
+		<ul id="content_reply{{ comment.id }}">
+			<li class="content-form-reply">
+				{{  form_start(form_reply,{'attr': {'id': 'FM'~comment.id, 'onsubmit':'return replyComment(this);'}, 'action': path('comment_reply',{'id':comment.id})} ) }}
+					{{ form_widget(form_reply.reply,{'attr':{'class':'form-control mb-2'}}) }}
+					<button class="btn btn-primary btn-sm">Repondre</button>
+				{{ form_end(form_reply) }}
+			</li>
+		</ul>
+	{% endif %}	
+{% endif %}
+{# si afficher les reponses #}
+{% if action == 'display_reply' %}
+	<ul id="content_reply{{ comment.id }}">
+		{% for reply in replies %}
+		    <li class="reply">
+		    	<img src="{{ asset('/upload/armel.jpg') }}" alt="" class="rounded-circle">
+				<span class="title"><strong>{{reply.user.nameuser}} : </strong></span>
+		    	{{ reply.getReply() }}
+			</li>
+		{% endfor %}
+	</ul>
+{% endif %}

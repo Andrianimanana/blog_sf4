@@ -1,0 +1,15 @@
+{# templates/blog/edit.html.twig #}
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} | Modifier{% endblock %}
+
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col s12 m12 l12">
+			<h4>Modifier l'article {{ article.getId() }}</h4>
+		</div>
+	</div>
+	{% include 'admin/include/_form_article.html.twig' %}
+</div>
+{% endblock %}
