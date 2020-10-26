@@ -1,0 +1,35 @@
+{% set nb = comments|length %}
+{% if nb %}
+<ul id="comment_list" class="commentaire">
+	<h5>
+		{% if nb > 1 %}
+		Commentaires <i>({{nb}}) </i> 
+		{% else %}
+		Commentaire <i>({{nb}}) </i>
+		{% endif %}
+	</h5>
+	{% for comment in comments %}
+	<li class="collection-item avatar">
+		<img src="{{ asset('/upload/armel.jpg') }}" alt="" class="circle">
+		<span class="title">{{comment.user.nameuser}}</span>
+		<p>{{comment.comment}}</p>
+		{% if app.user %}
+			<a id="ID{{ comment.id }}" href="#reply" class="secondary-content" onclick="replyComment(this);" data-url="{{ path('show_reply', {'id':comment.id}) }}">
+				<i class="material-icons blue-text">reply</i>
+			</a>
+		{% endif %}
+		{% if comment.replies.count  %}
+			<p class="more-reply" onclick="displayReply(this);" data-url="{{ path('display_reply', {'id':comment.id}) }}">
+				<a href="#more-reply">
+					{% if comment.replies.count > 1 %}
+						Afficher les {{comment.replies.count}} reponses
+					{% else %}
+						Afficher la reponse
+					{% endif %}
+				</a>
+			</p>
+		{% endif %}
+	</li>
+	{% endfor %}		
+</ul>
+{% endif %}

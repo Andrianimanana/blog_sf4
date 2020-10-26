@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent()}} | {{ article.getTitle() }}{% endblock %}
+
+{% block body %}
+<article id="detail-article" class="container">
+	<div class="row">
+		<div class="d-flex flex-column justify-content-center align-items-center">
+			<div class="col-md-6">
+				<h2>{{ article.getTitle() }}</h2>
+				<span>{{ article.getPublicationDate()|date('d/m/Y') }}</span>
+				<p>
+					<img src="{{ asset('upload/'~article.getPicture()) }}" class="img-fluid">
+				</p>
+				<span class="categories">
+					{% for category in article.categories %}
+					{{ category.libele }} {{ loop.last ? "" : "," }}
+					{% endfor %}
+				</span>
+			</div>
+			<div class="col-md-6 text-justify">
+				<p>
+					{{ article.getContent() }}
+				</p>
+			</div>
+		</div>
+	</div> 
+	{# zone commentaire #}
+	<div id="zone-commentaire">
+		{% include 'front/include/_comment.html.twig' %}
+	</div>		
+</article>
+{% endblock %}

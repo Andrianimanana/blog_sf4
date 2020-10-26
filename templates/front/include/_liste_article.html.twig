@@ -1,0 +1,15 @@
+{# templates/blog/includes/_liste_article.html.twig #}
+
+{% for article in articles %}
+	<div class="article card col-md-2 slide-items p-1 m-2">
+		<img src="{{ asset('upload/' ~ article.picture) }}" class="card-img-top">
+		<div class="card-body">
+			<h2 class="card-title"><a href="{{ path('show_article', {'id': article.id}) }}">{{ article.title }}</a></h2>
+			<span class="card-text date">{{ article.publicationDate|date('d/m/Y') }}</span>
+		</div>			
+	</div>
+{% endfor %}
+{# paginator #}
+<div class="col-md-12 _cont_pagination article">
+	{{ knp_pagination_render(articles) }}
+</div>	
