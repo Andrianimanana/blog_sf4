@@ -25,7 +25,7 @@ class LoginFormAuthenticorAuthenticator extends AbstractFormLoginAuthenticator i
     use TargetPathTrait;
 
     public const LOGIN_ROUTE = 'app_login';
-
+    public $user;
     private $entityManager;
     private $urlGenerator;
     private $csrfTokenManager;
@@ -73,7 +73,7 @@ class LoginFormAuthenticorAuthenticator extends AbstractFormLoginAuthenticator i
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
         }
-
+        $this->user = $user;
         return $user;
     }
 
@@ -95,9 +95,14 @@ class LoginFormAuthenticorAuthenticator extends AbstractFormLoginAuthenticator i
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-
+        // pas bon mais je le fait quand meme :/ :D 
+        // @toDo: best practice
+        if(in_array("ROLE_ADMIN", $this->user->getRoles())){
+            return new RedirectResponse($this->urlGenerator->generate('admin'));
+        }
+        
+        return new RedirectResponse($this->urlGenerator->generate('homepage'));
         // For example : return new  
-        return new RedirectResponse($this->urlGenerator->generate('admin'));
     }
 
     protected function getLoginUrl()
