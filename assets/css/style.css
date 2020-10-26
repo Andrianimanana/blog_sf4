@@ -1,3 +1,10 @@
+#comment_list .rounded-circle {
+    width: 30px;
+    height: 30px;
+}
+ul{
+    list-style-type: none;
+}
 button {
     outline: none!important;
 }
@@ -10,17 +17,27 @@ button {
     color: black;
 }
 
-#comment h5{
-    padding-top: 10px;
-    margin-top: 0;
-    border-top: 3px #5f5b5b solid;
-}
-#comment .btn{
-    float: right;
+.list-group-item{
+    border: none;
 }
 
 nav .nav-wrapper { 
     padding: 0 40px;
+}
+.stylish-color-dark {
+    background-color: #4B515D;
+}
+
+footer *{
+    color: #fff;
+}
+
+footer  .list-inline-item {
+    border: 1px solid #f9f5f5;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
 }
 
 .commentaire.collection .collection-item.avatar .secondary-content{
