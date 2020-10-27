@@ -1,3 +1,6 @@
+.form-group {
+    overflow: hidden;
+}
 #_add_article {
     font-size: 25px;
 }
