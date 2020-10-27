@@ -22,7 +22,7 @@ const scroll_infini = () => {
 	$('#list-articles').jscroll({
 		loadingHtml: '<div class="ias-spinner mx-auto d-block"><img src="../images/spinner4.gif"/></div>',
 		padding: 20,
-		nextSelector: '.next > a',
+		nextSelector: '.page-item > a',
 		contentSelector: '.article',
 		pagingSelector: '._cont_pagination',
 		callback: function(){

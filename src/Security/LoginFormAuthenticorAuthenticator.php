@@ -25,11 +25,12 @@ class LoginFormAuthenticorAuthenticator extends AbstractFormLoginAuthenticator i
     use TargetPathTrait;
 
     public const LOGIN_ROUTE = 'app_login';
-    public $user;
+    
     private $entityManager;
     private $urlGenerator;
     private $csrfTokenManager;
     private $passwordEncoder;
+    private $user;
 
     public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
     {

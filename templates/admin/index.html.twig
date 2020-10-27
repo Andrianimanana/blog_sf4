@@ -9,13 +9,13 @@
 		{#% include 'blog/include/_message.html.twig' %#}
 
 		<div class="row">
-			<div class="col s12">
+			<div class="col-md-12">
 				{% if is_granted('ROLE_ADMIN') %}
-					<a href="{{ path('add_article') }}" class="btn btn blue darken-4" style="float: right">Ajouter</a>
+					<a id="_add_article" alt="Ajouter une article" title="Ajouter une article" href="{{ path('add_article') }}" class="btn btn-lg" style="float: right"><i class="fas fa-plus-circle"></i></a>
 				{% endif %}
 				<h5>Articles</h5>
-				<table>
-					<tr>
+				<table class="table">
+					<tr class="thead-light">
 						<th>#</th>
 						<th>Titre</th>
 						<th>Publier</th>
@@ -37,8 +37,8 @@
 						<td>{{ article.lastUpdateDate|date('d/m/Y') }}</td>
 						<td>
 							{% if is_granted('ROLE_ADMIN') %}
-								<a href="{{ path('edit_article', {'id': article.id}) }}"><i class="material-icons blue-text">edit</i></a>
-								<a href="{{ path('remove_article', {'id': article.id}) }}"><i class="material-icons red-text">delete</i></a>
+								<a href="{{ path('edit_article', {'id': article.id}) }}" class="text-primary px-1"><i class="fas fa-pen"></i></a>
+								<a href="{{ path('remove_article', {'id': article.id}) }}" class="text-danger px-1"><i class="fas fa-trash-alt"></i></a>
 							{% else %}
 								<a href="#"><i class="material-icons blue-text">-</i></a>
 								<a href="#"><i class="material-icons red-text">-</i></a>	
@@ -48,14 +48,18 @@
 					{% set i = i+1 %}
 					{% endfor %}
 				</table>
+				{# paginator #}
+				<div class="row justify-content-center">
+					{{ knp_pagination_render(articles) }}
+				</div>	
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col s12 m-t-30">
 				<h5>Utilisateurs</h5>
-				<table>
-					<tr>
+				<table class="table">
+					<tr class="thead-light">
 						<th>#</th>
 						<th>Adresse email</th>
 						<th>Username</th>
@@ -74,7 +78,7 @@
 							</span>
 						</td>
 						<td>
-							<a href="#"><i class="material-icons red-text">delete</i></a>
+							<a href="#"><i class="fas fa-trash-alt text-danger"></i></a>
 						</td>
 					</tr>
 					{% set i = i+1 %}

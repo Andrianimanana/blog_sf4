@@ -12,6 +12,8 @@ use App\Form\ArticleType;
 use App\Entity\Article;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Constant\NumberConstant;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/admin")
@@ -26,13 +28,19 @@ class BlogAdminController extends AbstractController
 	/**
 	 * @Route("/",name="admin") 
 	 */
-	public function index(){
+	public function index(PaginatorInterface $paginator, Request $request){
         # list of article
 		$articles   = $this->getDoctrine()->getRepository(Article::class)->findAll();
+		
+        $articles_pagined = $paginator->paginate(
+            $articles, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            NumberConstant::NB_PER_PAGE // Nombre de résultats par page
+		);		
         # list of user
 		$users      = $this->getDoctrine()->getRepository(User::class)->findAll();
 		return $this->render('admin/index.html.twig', [
-			"articles"  => $articles,
+			"articles"  => $articles_pagined,
 			"users"     => $users
 		]);
 	}

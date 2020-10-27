@@ -14,6 +14,7 @@ use App\Entity\Reply;
 use App\Form\CommentType; 
 use App\Form\ReplyType;
 use App\Constant\MessageConstant;
+use App\Constant\NumberConstant;
 use Knp\Component\Pager\PaginatorInterface;
 
 class BlogController extends AbstractController
@@ -21,8 +22,7 @@ class BlogController extends AbstractController
     public const BLOG_CONST = [
         'display_reply' => 'display_reply',
         'display_form'  => 'display_form',
-        'show_comment'  => 'show_comment',
-        'nb_per_page'   => 20
+        'show_comment'  => 'show_comment'
     ];
      
     public function index(PaginatorInterface $paginator, Request $request)
@@ -34,7 +34,7 @@ class BlogController extends AbstractController
         $articles_pagined = $paginator->paginate(
             $articles, // Requête contenant les données à paginer (ici nos articles)
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            self::BLOG_CONST['nb_per_page'] // Nombre de résultats par page
+            NumberConstant::NB_PER_PAGE // Nombre de résultats par page
         );
         return $this->render('front/index.html.twig', [
             'articles' => $articles_pagined,
