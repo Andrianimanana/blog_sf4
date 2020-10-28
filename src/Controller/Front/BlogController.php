@@ -16,17 +16,26 @@ use App\Form\ReplyType;
 use App\Constant\MessageConstant;
 use App\Constant\NumberConstant;
 use Knp\Component\Pager\PaginatorInterface;
+use App\MeteoApi\MeteoApi;
 
 class BlogController extends AbstractController
 {
+    private $meteoApi;
+    
     public const BLOG_CONST = [
         'display_reply' => 'display_reply',
         'display_form'  => 'display_form',
         'show_comment'  => 'show_comment'
     ];
+
+    public function __construct(MeteoApi $meteoApi){ 
+        $this->meteoApi = $meteoApi;
+    }
      
     public function index(PaginatorInterface $paginator, Request $request)
     {
+        
+        #$this->meteoApi->getCurrent('Antsiranana')
         $articles = $this->getDoctrine()->getRepository(Article::class)->findBy(
             ["isPublised"        => true],
             ["publicationDate"   => "DESC"]

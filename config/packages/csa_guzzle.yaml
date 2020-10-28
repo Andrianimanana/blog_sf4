@@ -4,7 +4,7 @@
 csa_guzzle:
     profiler: '%kernel.debug%'
     clients:
-        default: null
-#        my_client:
-#            config:
-#                base_uri: 'http://example.com'
+#       default: null
+        weather:
+            config:
+                base_uri: 'http://api.openweathermap.org'
