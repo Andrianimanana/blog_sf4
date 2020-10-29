@@ -10,9 +10,9 @@ class MeteoApi
     private $serializer;
     private $apiKey;
 
-    public function __construct(Client $weatherClient, SerializerInterface $serializer)
+    public function __construct(Client $weatherClient, SerializerInterface $serializer, $apiKey)
     {
-        $this->apiKey           = NumberConstant::KEY_API_METEO;
+        $this->apiKey           = $apiKey;#NumberConstant::KEY_API_METEO;
         $this->serializer       = $serializer;
         $this->weatherClient    = $weatherClient;
     }

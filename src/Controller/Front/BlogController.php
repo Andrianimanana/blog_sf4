@@ -26,16 +26,12 @@ class BlogController extends AbstractController
         'display_reply' => 'display_reply',
         'display_form'  => 'display_form',
         'show_comment'  => 'show_comment'
-    ];
-
-    public function __construct(MeteoApi $meteoApi){ 
-        $this->meteoApi = $meteoApi;
-    }
+    ]; 
      
-    public function index(PaginatorInterface $paginator, Request $request)
-    {
-        
-        #$this->meteoApi->getCurrent('Antsiranana')
+    public function index(PaginatorInterface $paginator, Request $request, MeteoApi $meteoApi)
+    {        
+         
+        #dd($meteoApi->getCurrent('Antsiranana'));
         $articles = $this->getDoctrine()->getRepository(Article::class)->findBy(
             ["isPublised"        => true],
             ["publicationDate"   => "DESC"]
