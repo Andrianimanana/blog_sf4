@@ -16,7 +16,7 @@ use App\Constant\NumberConstant;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * @Route("/admin")
+ * @Route("/admin_old")
  */
 class BlogAdminController extends AbstractController
 {
