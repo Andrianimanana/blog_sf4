@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     app.dir.upload: '%kernel.project_dir%/public/upload'
+    app.api.key: '9ec869bf517283bd6698cd316ccd24b1'
 
 services:
     # default configuration for services in *this* file
@@ -32,4 +33,4 @@ services:
     # please note that last definitions always *replace* previous ones
     App\MeteoApi\MeteoApi:
         arguments:
-            $apiKey: '9ec869bf517283bd6698cd316ccd24b1'  
+            $apiKey: '%app.api.key%'  
