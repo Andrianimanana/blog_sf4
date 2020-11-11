@@ -45,9 +45,9 @@ class AppFixtures extends Fixture
 
         for($i=1;$i<200;$i++){
         	$article 	= new Article();
-        	$images 	= ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg"]; 
-        	$image 		= array_rand($images);
-    		$article->setPicture($images[$image]);
+        	#$images 	= ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg"]; 
+        	#$image 		= array_rand($images);
+    		$article->setPicture("0.jpg");
         	for($cat=1;$cat<rand(1,count($categories)); $cat++){
         		$category  	= array_rand($categories);
     			$article->addCategory($categories[$category]);
