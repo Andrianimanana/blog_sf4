@@ -2,20 +2,22 @@
 
 namespace App\Controller\Front;
 
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request; 
-use App\Entity\User;
+use App\Constant\MessageConstant;
+use App\Constant\NumberConstant;
 use App\Entity\Article;
 use App\Entity\Comment;
 use App\Entity\Reply;
-use App\Form\CommentType; 
+use App\Entity\User;
+use App\Event\CommentBlogEvent;
+use App\Form\CommentType;
 use App\Form\ReplyType;
-use App\Constant\MessageConstant;
-use App\Constant\NumberConstant;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class BlogController extends AbstractController
 {
@@ -62,7 +64,7 @@ class BlogController extends AbstractController
         ); 
     }
 
-    public function comment(Article $article, Comment $comment = null, Request $request){
+    public function comment(Article $article, Comment $comment = null, Request $request, EventDispatcherInterface $eventDispatcher){
 
         if(!$this->getUser() && $article){
             $this->addFlash(MessageConstant::ERROR_TYPE, MessageConstant::ERROR_AUTH_USER_MESSAGE);
@@ -80,6 +82,9 @@ class BlogController extends AbstractController
             $com->setUser($this->getUser());
             $em->persist($com);
             $em->flush();
+            // dispatch event
+            $event = new CommentBlogEvent($this->getUser(),$com);
+            $eventDispatcher->dispatch($event, CommentBlogEvent::NAME);
             // ajax save comment article
             if($request->query->get("ajax") && $request->query->get("ajax") == "comment_save"){
                 $comments = $this->getListCommentArticle($article);                 
